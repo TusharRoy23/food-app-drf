@@ -1,0 +1,12 @@
+Django>=4.2.7,<4.2.8
+djangorestframework==3.14.0
+Pillow>=10.1.0,<10.2.0
+djangorestframework-simplejwt==5.3.1
+
+# For postgres
+psycopg2==2.9.9
+
+# For dev only
+drf-yasg==1.21.7
+django-extensions==3.2.3  # https://github.com/django-extensions/django-extensions
+Werkzeug==3.0.1  # https://github.com/pallets/werkzeug

@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./docker/local/django/Dockerfile
+    image: food_app_drf_backend
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - "8080:8000"
+    command: /start
+    networks:
+      core_backend_network:
+        aliases:
+          - food-app-django
+      default:
+    stdin_open: true
+    tty: true
+
+  postgres:
+    image: postgres:15-alpine
+    volumes:
+      - local_pg_data:/var/lib/postgresql/data
+      - local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres
+    ports:
+      - "15432:5432"
+
+volumes:
+  local_pg_data: {}
+  local_postgres_data_backups: {}
+
+networks:
+  core_backend_network:
+    driver: bridge
