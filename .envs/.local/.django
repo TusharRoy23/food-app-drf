@@ -1,6 +1,8 @@
 # Django
 # ------------------------------------------------------------------------------
-DJANGO_ALLOWED_HOSTS=*
+DJANGO_ALLOWED_HOSTS=0.0.0.0,127.0.0.1,localhost,localhost:8080,localhost:8000
+SECRET_KEY=tz#@421=7&)^m)xxzmsq&id6c5yheb+qc4*ezn3+k0gqek4u%b
+DEBUG=True
 
 # Simple JWT
 # ------------------------------------------------------------------------------

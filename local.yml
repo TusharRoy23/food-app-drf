@@ -14,7 +14,7 @@ services:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
     ports:
-      - "8080:8000"
+      - "8080:8080"
     command: /start
     networks:
       core_backend_network:
@@ -32,7 +32,7 @@ services:
     env_file:
       - ./.envs/.local/.postgres
     ports:
-      - "15432:5432"
+      - "5432:5432"
 
 volumes:
   local_pg_data: {}
