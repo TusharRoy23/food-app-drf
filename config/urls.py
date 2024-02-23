@@ -15,8 +15,46 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Food API",
+        default_version='v1',
+        description="Food APP description",
+        terms_of_service="",
+        contact=openapi.Contact(email="risenboy23@gmail.com"),
+        license=openapi.License(name="BSD License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,), # noqa
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/user/', include('backend.user.urls')),
+    path('api/restaurant/', include('backend.restaurant.urls')),
 ]
+
+
+doc_patterns = [
+    path(
+        'api/docs/',
+        schema_view.with_ui('swagger', cache_timeout=0),
+        name='api-docs',
+    ),
+    path('api/redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc',),
+]
+
+urlpatterns += doc_patterns
+
+# if settings.DEBUG:
+#     urlpatterns += static(
+#         settings.MEDIA_URL,
+#         document_root=settings.MEDIA_ROOT,
+#     )

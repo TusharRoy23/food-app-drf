@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Restaurant
+
+
+class RestaurantModelAdmin(admin.ModelAdmin):
+    ordering = ['-created_at']
+    list_display = ['name', 'status', 'created_at', 'created_by']
+
+
+admin.site.register(Restaurant, RestaurantModelAdmin)
