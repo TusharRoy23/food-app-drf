@@ -1,4 +1,4 @@
-FROM python:3.11-alpine
+FROM python:3.10-alpine
 
 # Set to non-empty value (commonly set to 1) means it will not wait to show the outputs (logs or error)
 ENV PYTHONUNBUFFERED 1
