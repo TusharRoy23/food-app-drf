@@ -1,13 +1,14 @@
 version: "3.9"
 
 services:
-  django:
+  django: &django # Using anchor(&) defining the alias of the service
     build:
       context: .
       dockerfile: ./docker/local/django/Dockerfile
     image: food_app_drf_backend
     depends_on:
       - postgres
+      - redis
     volumes:
       - .:/app
     env_file:
@@ -33,6 +34,18 @@ services:
       - ./.envs/.local/.postgres
     ports:
       - "5432:5432"
+
+  redis:
+    image: redis:7.2
+
+  celery-worker:
+    <<: *django # Using asterisk(*) defining the usages of an alias
+    image: food_app_drf_backend_celery_worker
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celery-worker
 
 volumes:
   local_pg_data: {}

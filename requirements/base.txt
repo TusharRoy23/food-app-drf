@@ -13,3 +13,15 @@ psycopg2==2.9.9
 drf-yasg==1.21.7
 django-extensions==3.2.3  # https://github.com/django-extensions/django-extensions
 Werkzeug==3.0.1  # https://github.com/pallets/werkzeug
+
+# Async Task
+celery==5.3.6  # https://github.com/celery/celery
+flower==2.0.1  # https://github.com/mher/flower
+
+# Message broker
+redis==5.0.1  # https://github.com/antirez/redis
+
+
+# Only for dev
+# File watcher
+watchfiles==0.21.0  # https://github.com/samuelcolvin/watchfiles
