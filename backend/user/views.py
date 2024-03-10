@@ -11,6 +11,7 @@ from .serializers import CustomTokenObtainSerializer, CustomRefreshTokenSerializ
 from backend.common.views import BaseCreateAPIView
 from backend.rest_utils.exceptions import InvalidInputException
 from .services import UserService
+from .tasks import send_email
 
 
 class LoginUserView(TokenObtainPairView):
@@ -38,6 +39,13 @@ class RegisterUserView(BaseCreateAPIView):
             serializer = self.serializer_class(data=request.data, context={'request': request})
             serializer.is_valid(raise_exception=True)
             self.service_class().register_user(**serializer.validated_data)
+            data = serializer.validated_data
+            info = {
+                'to_email': [data['email']],
+                'subject': 'User registration',
+                'body': f'Welcome Mr/Mrs {data["first_name"]} {data["last_name"]}',
+            }
+            send_email.delay(**info)
             return Response({
                 'msg': 'Successfully Created.',
                 'status': status.HTTP_201_CREATED

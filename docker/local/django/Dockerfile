@@ -32,6 +32,11 @@ COPY ./docker/local/django/start /start
 RUN sed -i 's/\r//' /start
 RUN chmod +x /start
 
+# for celery worker
+COPY ./docker/local/django/celery/worker/start /start-celery-worker
+RUN sed -i 's/\r//' /start-celery-worker
+RUN chmod +x /start-celery-worker
+
 WORKDIR /app
 
 ENTRYPOINT ["/entrypoint"]
