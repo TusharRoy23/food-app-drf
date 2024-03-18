@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 
 from backend.common.models import BaseModel
 from .config import CurrentStatus
-from backend.rest_utils.exceptions import InvalidDateException
 
 
 class Restaurant(BaseModel):
@@ -46,9 +45,5 @@ class Restaurant(BaseModel):
     def __str__(self):
         return f"{self.name}"
 
-    def screen_restaurant_availability(self):
-        print('comparing...')
-        if self.opening_time >= self.closing_time:
-            return InvalidDateException(message=_('Opening time can not be greater than Closing time'))
 
 

@@ -39,6 +39,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/', include('backend.user.urls')),
     path('api/restaurant/', include('backend.restaurant.urls')),
+    path('api/items/', include('backend.item.urls')),
+    path('api/cart/', include('backend.cart.urls')),
 ]
 
 

@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'backend.user.middlewares.UserMiddleware',
     'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
@@ -145,6 +146,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         "rest_framework.permissions.IsAuthenticated",
+        "backend.common.permissions.CustomDjangoModelPermission",
     ),
     'EXCEPTION_HANDLER': "backend.rest_utils.exceptions.exception_handler",
 }
