@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import Cart, CartItem
 
+
 class CartItemModelAdmin(admin.TabularInline):
     model = CartItem
 
@@ -9,5 +10,5 @@ class CartItemModelAdmin(admin.TabularInline):
 class CartModelAdmin(admin.ModelAdmin):
     inlines = [CartItemModelAdmin]
 
-admin.site.register(Cart, CartModelAdmin)
 
+admin.site.register(Cart, CartModelAdmin)

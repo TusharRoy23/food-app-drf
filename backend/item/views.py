@@ -7,14 +7,10 @@ from backend.common.views import (
     BaseRestaurantRetrieveUpdateDestroyAPIView,
 )
 from backend.rest_utils.exceptions import NotFoundException
-from .serializer import (
-    ItemSerializer,
-    ItemOutputSerializer,
-    ItemUpdateSerializer,
-)
 
-from .services import ItemService
 from .models import Item
+from .serializer import ItemOutputSerializer, ItemSerializer, ItemUpdateSerializer
+from .services import ItemService
 
 
 class ItemListCreateView(BaseRestaurantCreateListAPIView):
@@ -26,14 +22,19 @@ class ItemListCreateView(BaseRestaurantCreateListAPIView):
         return Item.objects.filter(restaurant=self.get_restaurant_from_request().id)
 
     def post(self, request, *args, **kwargs):
-        serializer = self.input_serializer(data=request.data, context={'request': request})
+        serializer = self.input_serializer(
+            data=request.data, context={"request": request}
+        )
         serializer.is_valid(raise_exception=True)
-        serializer.validated_data['restaurant_id'] = self.get_restaurant_from_request().id
-        self.service_class(user=self.get_user()).create_item(**serializer.validated_data)
-        return Response({
-            'msg': 'Successfully Created.',
-            'status': status.HTTP_201_CREATED
-        })
+        serializer.validated_data["restaurant_id"] = (
+            self.get_restaurant_from_request().id
+        )
+        self.service_class(user=self.get_user()).create_item(
+            **serializer.validated_data
+        )
+        return Response(
+            {"msg": "Successfully Created.", "status": status.HTTP_201_CREATED}
+        )
 
 
 class ItemRetrieveUpdateDestroyAPIView(BaseRestaurantRetrieveUpdateDestroyAPIView):
@@ -47,15 +48,16 @@ class ItemRetrieveUpdateDestroyAPIView(BaseRestaurantRetrieveUpdateDestroyAPIVie
             self.check_object_permissions(self.request, obj)
             return obj
         except ObjectDoesNotExist:
-            raise NotFoundException(message=str('item not found'))
+            raise NotFoundException(message=str("item not found"))
 
     def update(self, request, *args, **kwargs):
         item = self.get_object()
-        serializer = self.input_serializer(data=request.data, context={'request': request})
+        serializer = self.input_serializer(
+            data=request.data, context={"request": request}
+        )
         serializer.is_valid(raise_exception=True)
-        item = self.service_class(user=self.get_user()).update_item(item, **serializer.validated_data)
+        item = self.service_class(user=self.get_user()).update_item(
+            item, **serializer.validated_data
+        )
         output = self.output_serializer(item)
         return Response(output.data)
-
-
-
