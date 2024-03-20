@@ -20,7 +20,7 @@ RUN pip install --upgrade pip
 
 # Install via requirements.txt
 COPY ./requirements /requirements
-RUN pip install -r /requirements/base.txt
+RUN pip install -r /requirements/local.txt
 
 COPY ./docker/local/django/entrypoint /entrypoint
 # here, s/\r// (search-replace-pattern) => Carriage return (\r) will be replaced by nothing("")
