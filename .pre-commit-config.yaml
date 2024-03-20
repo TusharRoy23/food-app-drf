@@ -1,4 +1,4 @@
-exclude: "^/migrations/"
+exclude: "^/migrations/|tests.py"
 default_stages:
   - commit
 
