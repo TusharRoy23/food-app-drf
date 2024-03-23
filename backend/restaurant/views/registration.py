@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from backend.common.views import BaseCreateAPIView
 from backend.restaurant.services import RestaurantService
 
-from .serializers import RegisterRestaurantSerializer
+from ..serializers import RegisterRestaurantSerializer
 
 
 class RegisterRestaurantView(BaseCreateAPIView):

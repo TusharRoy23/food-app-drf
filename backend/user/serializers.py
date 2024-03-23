@@ -12,7 +12,7 @@ from rest_framework_simplejwt.serializers import (
 )
 from rest_framework_simplejwt.tokens import Token
 
-from .services.blacklist_token_service import TokenBlacklistService
+# from .services.blacklist_token_service import TokenBlacklistService
 
 User = get_user_model()
 
@@ -48,17 +48,15 @@ class CustomTokenObtainSerializer(TokenObtainPairSerializer):
 
 
 class CustomRefreshTokenSerializer(TokenRefreshSerializer):
-    access = serializers.CharField(required=True)
 
     def validate(self, attrs: Dict[str, Any]) -> Dict[str, str]:
         data = super().validate(attrs)
-        data["access"] = data.pop("access")
         data["refresh"] = data.pop("refresh")
-        if attrs.get("access"):
-            TokenBlacklistService.get_or_create_blacklisted_access_token(
-                attrs["access"]
-            )
-
+        # TODO: Need to confirm refresh token blacklist
+        # if attrs.get("refresh"):
+        #     TokenBlacklistService.get_or_create_blacklisted_access_token(
+        #         attrs["refresh"]
+        #     )
         return data
 
 

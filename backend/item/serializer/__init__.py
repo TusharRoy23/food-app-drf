@@ -1,1 +1,1 @@
-from .serializers import ItemOutputSerializer, ItemSerializer, ItemUpdateSerializer
+from .serializers import BaseItemOutputSerializer, ItemOutputSerializer

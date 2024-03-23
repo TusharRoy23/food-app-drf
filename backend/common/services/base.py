@@ -146,3 +146,14 @@ class BaseModelService:
             return self.__get_queryset(**kwargs).get(uuid=uuid)
         except self.model.DoesNotExist:
             raise ObjectDoesNotExist
+
+    def list(self, **query_params):
+        assert self.model is not None, (
+            "'%s' should either include a `model` attribute, "
+            "or override the `list()` method." % self.__class__.__name__
+        )
+        queryset = self.__get_queryset()
+        if query_params:
+            queryset = queryset.filter(**query_params)
+
+        return queryset

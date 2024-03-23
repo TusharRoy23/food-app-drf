@@ -70,3 +70,6 @@ class Item(BaseModel):
         verbose_name=_("Item Status"),
         help_text=_("Select a Item Status"),
     )
+
+    def __str__(self):
+        return f"{self.code} - {self.name}"

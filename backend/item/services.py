@@ -1,6 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 
-from backend.common.services.base_model_service import BaseModelService
+from backend.common.services import BaseModelService
 from backend.rest_utils.exceptions import NotFoundException
 
 from .models import Item
