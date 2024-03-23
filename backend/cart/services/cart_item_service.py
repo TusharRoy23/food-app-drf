@@ -27,7 +27,13 @@ class CartItemService(BaseModelService):
         total_amount = CartItem.objects.filter(cart__uuid=cart.uuid).aggregate(
             total_amount=Sum("total_amount")
         )["total_amount"]
-        return cart_service.save_cart(cart, {"total_amount": total_amount})
+        return cart_service.save_cart(
+            cart,
+            **{
+                "cart_amount": total_amount,
+                "total_amount": total_amount,
+            }
+        )
 
     def create_cart_item(self, payload):
         self.create(

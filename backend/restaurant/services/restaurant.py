@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 from backend.common import services
 from backend.contact.services import ContactPersonService, ContactService
+from backend.order.services import OrderService
 from backend.rest_utils.exceptions import (
     BadRequestException,
     InvalidInputException,
@@ -17,6 +18,8 @@ class RestaurantService(services.BaseModelService):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.user_service = UserService()
+        self.order_service = OrderService()
 
     def _create_contact(self, **kwargs):
         try:
@@ -39,7 +42,7 @@ class RestaurantService(services.BaseModelService):
         try:
             # check if the user exists
             email = kwargs.pop("email")
-            user = UserService().get_user_info(email)
+            user = self.user_service.get_user_info(email)
 
             contact_person = ContactPersonService().get_contact_person(email)
 
@@ -64,3 +67,19 @@ class RestaurantService(services.BaseModelService):
             return self.model.objects.get(**kwargs)
         except ObjectDoesNotExist as e:
             raise NotFoundException(message=str(e))
+
+    def get_orders(self):
+        return self.order_service.list(
+            **{"restaurant": self.user.contact_person_user.contact.restaurant.id}
+        )
+
+    def get_order(self, order_uuid):
+        return self.order_service.get_order(
+            **{
+                "restaurant": self.user.contact_person_user.contact.restaurant.id,
+                "uuid": order_uuid,
+            }
+        )
+
+    def update_order(self, order, data):
+        return self.order_service.update_order(order, data)

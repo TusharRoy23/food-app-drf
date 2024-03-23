@@ -7,7 +7,7 @@ from backend.common.permissions import (
 
 
 class RetrieveAPIMixin(object):
-    def get_object(self):
+    def get_object(self, **queryset):
         """
         This method will override the 'get_object' method of 'GenericAPiView' class of DRF.
         :return: model instance
@@ -18,6 +18,8 @@ class RetrieveAPIMixin(object):
         )
 
         query_params = {}
+        if queryset:
+            query_params.update(queryset)
         service = self.service_class(user=self.request.user)
 
         uuid = self.kwargs.get("uuid")

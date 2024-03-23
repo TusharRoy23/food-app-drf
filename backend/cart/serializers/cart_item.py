@@ -5,7 +5,7 @@ from rest_framework import serializers
 from backend.cart.models import CartItem
 from backend.common.serializers import BaseSerializer
 from backend.item.models import Item
-from backend.item.serializer import ItemOutputSerializer
+from backend.item.serializer import BaseItemOutputSerializer
 from backend.rest_utils.exceptions import InvalidInputException, NotFoundException
 
 
@@ -38,19 +38,10 @@ class CartItemCreateSerializer(BaseSerializer):
             raise NotFoundException(errors={"items": {"uuid": [_("Item not found")]}})
 
 
-class CartItemOutputSerializer(BaseSerializer):
-    item = serializers.SerializerMethodField()
-
+class CartItemOutputSerializer(BaseItemOutputSerializer):
     class Meta:
         model = CartItem
         fields = ["uuid", "quantity", "item", "amount", "total_amount"]
-
-    def get_item(self, cart_item):
-        serializer = ItemOutputSerializer(
-            instance=Item.objects.get(uuid=cart_item.item.uuid),
-            fields=["uuid", "name", "code"],
-        )
-        return serializer.data
 
 
 class CartItemUpdateSerializer(BaseSerializer):

@@ -52,6 +52,27 @@ class BaseCreateListAPIView(
     service_class = None
 
 
+class BaseListAPIView(RequestMixins, BaseGenericAPIView, generics.ListAPIView):
+    """
+    Base List API View
+    """
+
+    service_class = None
+
+
+class BaseRetrieveAPIView(
+    RequestMixins,
+    RetrieveAPIMixin,
+    BaseGenericAPIView,
+    generics.RetrieveAPIView,
+):
+    """
+    Base Retrieve API View
+    """
+
+    service_class = None
+
+
 class BaseRetrieveUpdateDestroyAPIView(
     RequestMixins,
     RetrieveAPIMixin,
@@ -63,6 +84,15 @@ class BaseRetrieveUpdateDestroyAPIView(
     """
 
     service_class = None
+
+
+class BaseRestaurantListAPIView(
+    RestaurantAPIPermissionMixin,
+    BaseListAPIView,
+):
+    """
+    List permission for restaurants users
+    """
 
 
 class BaseRestaurantCreateListAPIView(
@@ -83,18 +113,27 @@ class BaseRestaurantRetrieveUpdateDestroyAPIView(
     """
 
 
-class BaseVisitorAPIView(
+class BaseVisitorAPIPermissionMixin(
     VisitorAPIPermissionMixin,
     IndividualVisitorAPIPermissionMixin,
 ):
     """
-    Base View for Visitors
+    Base permission mixin for Visitors
+    """
+
+
+class BaseVisitorCreateListAPIView(
+    BaseVisitorAPIPermissionMixin,
+    BaseCreateListAPIView,
+):
+    """
+    Create, List permission for visitor users
     """
 
 
 class BaseVisitorCreateAPIView(
     RequestMixins,
-    BaseVisitorAPIView,
+    BaseVisitorAPIPermissionMixin,
     BaseCreateAPIView,
 ):
     """
@@ -103,9 +142,27 @@ class BaseVisitorCreateAPIView(
 
 
 class BaseVisitorRetrieveUpdateDeleteAPIView(
-    BaseVisitorAPIView,
+    BaseVisitorAPIPermissionMixin,
     BaseRetrieveUpdateDestroyAPIView,
 ):
     """
     Fetch, Update and Delete permissions for visitor
+    """
+
+
+class BaseVisitorListAPIView(
+    BaseVisitorAPIPermissionMixin,
+    BaseListAPIView,
+):
+    """
+    List permissions for visitor
+    """
+
+
+class BaseVisitorRetrieveAPIView(
+    VisitorAPIPermissionMixin,
+    BaseRetrieveAPIView,
+):
+    """
+    Retrieve permissions for visitor
     """

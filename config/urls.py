@@ -40,6 +40,7 @@ urlpatterns = [
     path("api/restaurant/", include("backend.restaurant.urls")),
     path("api/items/", include("backend.item.urls")),
     path("api/cart/", include("backend.cart.urls")),
+    path("api/order/", include("backend.order.urls")),
 ]
 
 
