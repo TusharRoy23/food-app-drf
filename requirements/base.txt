@@ -8,6 +8,7 @@ django-simple-history==3.4.0  # https://django-simple-history.readthedocs.io/en/
 drf-yasg==1.21.7
 django-extensions==3.2.3  # https://github.com/django-extensions/django-extensions
 Werkzeug==3.0.1  # https://github.com/pallets/werkzeug
+django-filter==23.5  # https://github.com/carltongibson/django-filter
 
 # Async Task
 celery==5.3.6  # https://github.com/celery/celery

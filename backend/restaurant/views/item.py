@@ -7,6 +7,7 @@ from backend.common.views import (
     BaseRestaurantCreateListAPIView,
     BaseRestaurantRetrieveUpdateDestroyAPIView,
 )
+from backend.item.filters import ItemListFilter
 from backend.item.serializer import ItemOutputSerializer
 from backend.item.services import ItemService
 from backend.rest_utils.exceptions import NotFoundException
@@ -19,17 +20,13 @@ class ItemListCreateView(BaseRestaurantCreateListAPIView):
     output_serializer = ItemOutputSerializer
     service_class = ItemService
     pagination_class = BasePagination
+    filterset_class = ItemListFilter
 
     def list(self, request, *args, **kwargs):
-        items = (
-            self.service_class(user=self.get_user())
-            .list(
-                **{
-                    "restaurant__id": self.get_restaurant_from_request().id,
-                }
-            )
-            .order_by("-created_at")
-        )
+        items = self.get_queryset(
+            **{"restaurant__id": self.get_restaurant_from_request().id}
+        ).order_by("-created_at")
+        items = self.filter_queryset(items)
         paginated_items = self.paginate_queryset(items)
         if paginated_items is not None:
             output = self.output_serializer(paginated_items, many=True)

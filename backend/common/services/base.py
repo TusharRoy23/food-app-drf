@@ -100,7 +100,7 @@ class BaseModelService:
         instance.save()
         return instance
 
-    def get_query_params(self, query_params):
+    def __get_query_params(self, query_params):
         """
         Parse the query params and filter against the model fields.
 
@@ -131,7 +131,7 @@ class BaseModelService:
         )
         queryset = self.model.objects.all()
 
-        and_query_params = self.get_query_params(query_params=query_params)
+        and_query_params = self.__get_query_params(query_params=query_params)
         if and_query_params:
             queryset = queryset.filter(**and_query_params)
 
@@ -153,7 +153,8 @@ class BaseModelService:
             "or override the `list()` method." % self.__class__.__name__
         )
         queryset = self.__get_queryset()
-        if query_params:
-            queryset = queryset.filter(**query_params)
+        and_query_params = self.__get_query_params(query_params=query_params)
+        if and_query_params:
+            queryset = queryset.filter(**and_query_params)
 
         return queryset

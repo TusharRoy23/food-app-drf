@@ -2,6 +2,7 @@ from rest_framework import generics
 
 from backend.common.mixins import (
     IndividualVisitorAPIPermissionMixin,
+    ListAPIMixin,
     RequestMixins,
     RestaurantAPIPermissionMixin,
     RestaurantStaffAPIPermissionMixin,
@@ -43,7 +44,7 @@ class BaseCreateAPIView(generics.CreateAPIView):
 
 
 class BaseCreateListAPIView(
-    RequestMixins, BaseGenericAPIView, generics.ListCreateAPIView
+    RequestMixins, BaseGenericAPIView, ListAPIMixin, generics.ListCreateAPIView
 ):
     """
     Base Create and List API View
@@ -52,7 +53,9 @@ class BaseCreateListAPIView(
     service_class = None
 
 
-class BaseListAPIView(RequestMixins, BaseGenericAPIView, generics.ListAPIView):
+class BaseListAPIView(
+    RequestMixins, BaseGenericAPIView, ListAPIMixin, generics.ListAPIView
+):
     """
     Base List API View
     """

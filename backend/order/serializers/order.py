@@ -26,6 +26,7 @@ class OrderOutputSerializer(BaseSerializer):
         model = Order
         fields = [
             "uuid",
+            "code",
             "order_amount",
             "total_amount",
             "rebate_amount",

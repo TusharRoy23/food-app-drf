@@ -8,6 +8,7 @@ from backend.common.views import (
     BaseRestaurantListAPIView,
     BaseRetrieveUpdateDestroyAPIView,
 )
+from backend.order.filters import OrderListFilter
 from backend.order.serializers import OrderOutputSerializer
 from backend.rest_utils.exceptions import NotFoundException
 
@@ -19,9 +20,13 @@ class OrderListAPIView(BaseRestaurantListAPIView):
     output_serializer = OrderOutputSerializer
     service_class = RestaurantService
     pagination_class = BasePagination
+    filterset_class = OrderListFilter
 
     def list(self, request, *args, **kwargs):
-        orders = self.service_class(user=self.get_user()).get_orders()
+        orders = self.service_class(user=self.get_user()).get_orders(
+            **request.query_params.dict()
+        )
+        orders = self.filter_queryset(orders)
         paginated_orders = self.paginate_queryset(orders)
         if paginated_orders is not None:
             output = self.output_serializer(paginated_orders, many=True)

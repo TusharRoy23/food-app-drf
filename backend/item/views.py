@@ -6,6 +6,7 @@ from backend.common.views import BaseVisitorListAPIView, BaseVisitorRetrieveAPIV
 from backend.rest_utils.exceptions import NotFoundException
 
 from .config import ItemStatus
+from .filters import ItemListFilter
 from .serializer import ItemOutputSerializer
 from .services import ItemService
 
@@ -14,11 +15,11 @@ class ItemListAPIView(BaseVisitorListAPIView):
     service_class = ItemService
     output_serializer = ItemOutputSerializer
     pagination_class = BasePagination
+    filterset_class = ItemListFilter
 
     def list(self, request, *args, **kwargs):
-        items = self.service_class(user=self.get_user()).list(
-            **{"status": ItemStatus.ACTIVE}
-        )
+        items = self.get_queryset(**{"status": ItemStatus.ACTIVE})
+        items = self.filter_queryset(items)
         paginated_items = self.paginate_queryset(items)
         if paginated_items is not None:
             output = self.output_serializer(paginated_items, many=True)

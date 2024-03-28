@@ -68,9 +68,12 @@ class RestaurantService(services.BaseModelService):
         except ObjectDoesNotExist as e:
             raise NotFoundException(message=str(e))
 
-    def get_orders(self):
+    def get_orders(self, **kwargs):
         return self.order_service.list(
-            **{"restaurant": self.user.contact_person_user.contact.restaurant.id}
+            **{
+                "restaurant": self.user.contact_person_user.contact.restaurant.id,
+                **kwargs,
+            }
         )
 
     def get_order(self, order_uuid):

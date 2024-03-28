@@ -138,6 +138,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "user.User"
 
 REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
     "DEFAULT_RENDERER_CLASSES": ("backend.rest_utils.renderers.APIJSONRenderer",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "backend.user.services.CustomJWTAuthenticationService",
