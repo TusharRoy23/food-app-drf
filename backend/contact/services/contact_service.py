@@ -1,16 +1,16 @@
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db.models import Q
 
-from backend.common import services
+from backend.common.services import BaseModelService
 from backend.contact.models import Contact
 from backend.rest_utils.exceptions import InvalidInputException, NotFoundException
 
 
-class ContactService(services.BaseModelService):
+class ContactService(BaseModelService):
     model = Contact
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(ContactService, self).__init__(*args, **kwargs)
 
     def register_contact(self, **kwargs):
         try:
