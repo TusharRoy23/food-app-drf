@@ -14,14 +14,17 @@ class UserService(services.BaseModelService):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.contact_service = ContactService()
+        self.contact_person_service = ContactPersonService()
 
-    def _register_contact(self, **kwargs):
-        contact = ContactService().get_contact_info(kwargs["contact_code"])
+    def __register_contact(self, **kwargs):
+        contact = self.contact_service.get_contact_info(kwargs["contact_code"])
+
         contact_person = {
             "contact_id": contact.id,
             "user_id": kwargs["user"].id,
         }
-        ContactPersonService().register_contact_person(**contact_person)
+        self.contact_person_service.register_contact_person(**contact_person)
 
     def register_user(self, **kwargs) -> User:
         try:
@@ -32,7 +35,7 @@ class UserService(services.BaseModelService):
             if kwargs["is_visitor"]:
                 kwargs["user"] = user
                 kwargs["contact_code"] = "visitor"
-                self._register_contact(**kwargs)
+                self.__register_contact(**kwargs)
 
             return user
         except ValidationError as ve:

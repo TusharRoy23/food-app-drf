@@ -118,7 +118,7 @@ class BaseModel(LogBaseModel):
         verbose_name=_("UUID"),
         help_text=_("Unique ID"),
     )
-    code = models.CharField(max_length=120, help_text=_("Unique Code"))
+    code = models.CharField(max_length=120, help_text=_("Unique Code"), unique=True)
 
     class Meta:
         abstract = True

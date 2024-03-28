@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Contact, ContactPerson
+from .models import Contact, ContactGroup, ContactPerson, DjangoContactGroup
 
 
 class ContactPersonInline(admin.TabularInline):
@@ -16,3 +16,5 @@ class ContactModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Contact, ContactModelAdmin)
+admin.site.register(ContactGroup)
+admin.site.register(DjangoContactGroup)

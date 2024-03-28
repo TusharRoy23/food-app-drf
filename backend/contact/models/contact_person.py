@@ -2,26 +2,12 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from backend.common.models.base import BaseModel
-from backend.rest_utils.exceptions import InvalidInputException
-from backend.restaurant.models import Restaurant
+from backend.common.models import BaseModel
+
+from ...rest_utils.exceptions import InvalidInputException
+from .contact import Contact
 
 User = get_user_model()
-
-
-class Contact(BaseModel):
-    restaurant = models.ForeignKey(
-        Restaurant,
-        related_name="contact_restaurant",
-        on_delete=models.PROTECT,
-        null=True,
-        blank=True,
-        verbose_name=_("Restaurant"),
-        help_text=_("For restaurant user"),
-    )
-
-    def __str__(self):
-        return f"{self.code}-{self.restaurant.name if self.restaurant else ''}"
 
 
 class ContactPerson(BaseModel):

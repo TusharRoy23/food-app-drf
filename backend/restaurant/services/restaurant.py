@@ -2,7 +2,11 @@ from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from backend.common import services
-from backend.contact.services import ContactPersonService, ContactService
+from backend.contact.services import (
+    ContactGroupService,
+    ContactPersonService,
+    ContactService,
+)
 from backend.order.services import OrderService
 from backend.rest_utils.exceptions import (
     BadRequestException,
@@ -20,12 +24,20 @@ class RestaurantService(services.BaseModelService):
         super().__init__(*args, **kwargs)
         self.user_service = UserService()
         self.order_service = OrderService()
+        self.contact_group_service = ContactGroupService()
+        self.contact_service = ContactService()
+        self.contact_person_service = ContactPersonService()
 
     def _create_contact(self, **kwargs):
         try:
+            # Add Contact group - will change later for restaurant user
+            contact_group = self.contact_group_service.get_info(code="restaurant_owner")
             # create contact
-            contact = ContactService().register_contact(
-                **{"restaurant_id": kwargs["restaurant"].id}
+            contact = self.contact_service.register_contact(
+                **{
+                    "restaurant_id": kwargs["restaurant"].id,
+                    "contact_group": contact_group,
+                }
             )
             # create contact person
             contact_person = {
@@ -34,7 +46,7 @@ class RestaurantService(services.BaseModelService):
                 "is_restaurant_owner": True,
                 "is_restaurant_user": True,
             }
-            ContactPersonService().register_contact_person(**contact_person)
+            self.contact_person_service.register_contact_person(**contact_person)
         except ValidationError as e:
             raise InvalidInputException(message=str(e))
 
@@ -44,7 +56,7 @@ class RestaurantService(services.BaseModelService):
             email = kwargs.pop("email")
             user = self.user_service.get_user_info(email)
 
-            contact_person = ContactPersonService().get_contact_person(email)
+            contact_person = self.contact_person_service.get_contact_person(email)
 
             if user.is_visitor or contact_person is not None:
                 raise BadRequestException(message=_("User already exists"))
