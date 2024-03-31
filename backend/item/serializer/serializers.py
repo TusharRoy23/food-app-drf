@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from backend.common.serializers import BaseSerializer, ExcludeFieldsMixin
+from backend.common.mixins import ExcludeFieldsMixin
+from backend.common.serializers import BaseSerializer
 
 from ..models import Item
 

@@ -2,7 +2,8 @@ from rest_framework import serializers
 
 from backend.common.serializers import BaseSerializer
 from backend.item.serializer import BaseItemOutputSerializer
-from backend.order.models import Order, OrderItem
+
+from ..models import Order, OrderItem
 
 
 class OrderCreateSerializer(serializers.ModelSerializer):
