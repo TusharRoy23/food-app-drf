@@ -61,8 +61,6 @@ class MealFlavor:
 class MealType:
     DAILYFOOD = "daily food"
     FASTFOOD = "fast food"
-    SNACKS = "snacks"
-    BURGERS = "burgers"
     MEAT = "meat"
     FISH = "fish"
     BEVERAGE = "beverage"
@@ -73,8 +71,6 @@ class MealType:
     CHOICES = (
         (DAILYFOOD, "daily food"),
         (FASTFOOD, "fast food"),
-        (SNACKS, "snacks"),
-        (BURGERS, "burgers"),
         (MEAT, "meat"),
         (FISH, "fish"),
         (BEVERAGE, "beverage"),

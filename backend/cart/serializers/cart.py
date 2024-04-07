@@ -1,11 +1,9 @@
 from rest_framework import serializers
 
-from backend.cart.models import Cart, CartItem
-from backend.cart.serializers.cart_item import (
-    CartItemCreateSerializer,
-    CartItemOutputSerializer,
-)
 from backend.common.serializers import BaseSerializer
+
+from ..models import Cart, CartItem
+from .cart_item import CartItemCreateSerializer, CartItemOutputSerializer
 
 
 class CartCreateSerializer(BaseSerializer):

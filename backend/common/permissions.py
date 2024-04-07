@@ -42,7 +42,6 @@ class CustomDjangoModelPermission(permissions.DjangoModelPermissions):
         # to the root view when using DefaultRouter.
         if getattr(view, "_ignore_model_permissions", False):
             return True
-
         if not request.user or (
             not request.user.is_authenticated and self.authenticated_users_only
         ):

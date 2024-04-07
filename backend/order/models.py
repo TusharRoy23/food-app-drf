@@ -3,9 +3,9 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from backend.common.models import BaseModel
+from backend.common.validators import ScreenMethodValidator
 from backend.restaurant.models import Restaurant
 
-from ..common import ScreenMethodValidator
 from ..item.models import Item
 from .config import OrderStatus, PaidBy
 

@@ -11,3 +11,10 @@ pylint-celery==0.3  # https://github.com/PyCQA/pylint-celery
 
 # File watcher
 watchfiles==0.21.0  # https://github.com/samuelcolvin/watchfiles
+
+# Testing
+mypy==1.9.0  # https://github.com/python/mypy
+pytest==8.1.1  # https://github.com/pytest-dev/pytest
+pytest-django==4.8.0  # https://github.com/pytest-dev/pytest-django
+factory-boy==3.3.0  # https://github.com/FactoryBoy/factory_boy
+Faker==24.4.0  # https://github.com/joke2k/faker

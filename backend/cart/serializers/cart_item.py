@@ -2,11 +2,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
-from backend.cart.models import CartItem
 from backend.common.serializers import BaseSerializer
 from backend.item.models import Item
 from backend.item.serializer import BaseItemOutputSerializer
 from backend.rest_utils.exceptions import InvalidInputException, NotFoundException
+
+from ..models import CartItem
 
 
 class CartItemCreateSerializer(BaseSerializer):
