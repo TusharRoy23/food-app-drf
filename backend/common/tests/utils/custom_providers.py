@@ -15,5 +15,14 @@ class CustomFakerProvider(BaseProvider):
     def uuid(self):
         return str(uuid.uuid4())
 
+    def price(self, length=3):
+        min_value = 10 ** (length - 1)
+        max_value = (10**length) - 1
+        return random.randint(min_value, max_value)
+
+    def food(self):
+        foods = ["rice", "daal", "fish", "yam", "beans", "spaghetti"]
+        return self.random_element(foods)
+
 
 Faker.add_provider(CustomFakerProvider)
