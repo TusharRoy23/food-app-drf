@@ -2,6 +2,9 @@ from backend.cart.config import CartStatus
 from backend.cart.services import CartService
 from backend.common.services import BaseModelService
 from backend.order.models import Order
+from backend.restaurant.services.restaurant_notification_service import (
+    RestaurantNotificationService,
+)
 
 from .order_item import OrderItemService
 
@@ -16,6 +19,11 @@ class OrderService(BaseModelService):
 
     def get_order(self, **kwargs):
         return self.model.objects.get(**kwargs)
+
+    def __send_notification_to_restaurant(self, order: Order):
+        RestaurantNotificationService(code=order.restaurant.code).send_notification(
+            **{"message": f"New Order {order.code}"}
+        )
 
     def create_order(self, data):
         cart = self.cart_service.get_cart(
@@ -33,9 +41,10 @@ class OrderService(BaseModelService):
             order=order, cart_items=cart_items
         )
         self.cart_service.save_cart(cart, **{"status": CartStatus.APPROVED})
-
+        self.__send_notification_to_restaurant(order)
         return result
 
     def update_order(self, order, data):
         self.update_model_instance(order, **data)
-        return self.get_order(uuid=order.uuid)
+        order = self.get_order(uuid=order.uuid)
+        return order

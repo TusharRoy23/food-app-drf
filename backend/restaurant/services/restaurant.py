@@ -7,6 +7,7 @@ from backend.contact.services import (
     ContactPersonService,
     ContactService,
 )
+from backend.order.models import Order
 from backend.order.services import OrderService
 from backend.rest_utils.exceptions import (
     BadRequestException,
@@ -15,6 +16,7 @@ from backend.rest_utils.exceptions import (
 )
 from backend.restaurant.models import Restaurant
 from backend.user.services import UserService
+from backend.user.services.user_notification_service import UserNotificationService
 
 
 class RestaurantService(services.BaseModelService):
@@ -49,6 +51,11 @@ class RestaurantService(services.BaseModelService):
             self.contact_person_service.register_contact_person(**contact_person)
         except ValidationError as e:
             raise InvalidInputException(message=str(e))
+
+    def __send_notification_to_user(self, order: Order):
+        UserNotificationService(user_id=order.user.id).send_notification(
+            **{"message": f"Order {order.code} is {order.status}"}
+        )
 
     def register_restaurant(self, **kwargs):
         try:
@@ -97,4 +104,6 @@ class RestaurantService(services.BaseModelService):
         )
 
     def update_order(self, order, data):
-        return self.order_service.update_order(order, data)
+        result = self.order_service.update_order(order, data)
+        self.__send_notification_to_user(order)
+        return result
