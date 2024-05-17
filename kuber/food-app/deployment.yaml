@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: food-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: food-app
+  template:
+    metadata:
+      labels:
+        app: food-app
+    spec:
+      containers:
+        - name: food-app-prod
+          image: food_app_drf_backend_prod
+          imagePullPolicy: Never
+          command:
+            - "/bin/sh"
+            - "-c"
+            - |
+              /start-migration
+              /start
+          envFrom:
+            - configMapRef:
+                name: app-env
+          volumeMounts:
+            - mountPath: /data/app
+              name: food-app-prod-volume
+      volumes:
+        - name: food-app-prod-volume
+          persistentVolumeClaim:
+            claimName: host-pvc-2

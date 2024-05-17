@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  django: &django # Using anchor(&) defining the alias of the service
+    build:
+      context: .
+      dockerfile: ./docker/staging/django/Dockerfile
+    image: food_app_drf_backend_prod
+    command: ["/start"]
+
+  celery-worker:
+    <<: *django # Using asterisk(*) defining the usages of an alias
+    image: food_app_drf_backend_celery_worker_prod
+    command: /start-celery-worker
