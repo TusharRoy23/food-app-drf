@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx
 spec:
   selector:
     matchLabels:
@@ -13,7 +13,20 @@ spec:
     spec:
       containers:
         - name: nginx-prod
-          image: nginx-docker
-          imagePullPolicy: Never
+          image: nginx:stable-alpine3.19
           ports:
             - containerPort: 80
+          volumeMounts:
+            - mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+              name: nginx-storage
+              readOnly: true
+            - mountPath: /data/staticfiles
+              name: staticfiles
+      volumes:
+        - name: nginx-storage
+          configMap:
+            name: nginx-cm
+        - name: staticfiles
+          persistentVolumeClaim:
+            claimName: django-pvc

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-task
+spec:
+  selector:
+    matchLabels:
+      app: celery-task
+  template:
+    metadata:
+      labels:
+        app: celery-task
+    spec:
+      containers:
+        - name: food-app-celery
+          image: food_app_drf_backend_celery_worker_prod
+          imagePullPolicy: Never
+          command:
+            - "/bin/sh"
+            - "-c"
+            - |
+              /start-celery-worker
+          envFrom:
+            - configMapRef:
+                name: app-env
+

@@ -53,6 +53,11 @@ RUN sed -i 's/\r//' /start-migration
 RUN chmod +x /start-migration
 RUN chown django /start-migration
 
+COPY ./docker/staging/django/daphne/start /start-daphne
+RUN sed -i 's/\r//' /start-daphne
+RUN chmod +x /start-daphne
+RUN chown django /start-daphne
+
 COPY . /app
 RUN chown -R django /app
 

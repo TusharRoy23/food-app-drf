@@ -14,3 +14,10 @@ spec:
       containers:
         - name: redis
           image: redis:7.2
+          volumeMounts:
+            - mountPath: /data/redis
+              name: redis-data
+      volumes:
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: redis-pvc

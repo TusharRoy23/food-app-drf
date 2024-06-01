@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-deployment
+  name: postgres
 spec:
   selector:
     matchLabels:
@@ -19,8 +19,8 @@ spec:
                 name: app-env
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgres-volume
+              name: db-data
       volumes:
-        - name: postgres-volume
+        - name: db-data
           persistentVolumeClaim:
-            claimName: host-pvc-2
+            claimName: postgres-pvc
