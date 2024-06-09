@@ -1,0 +1,5 @@
+#!/bin/sh
+
+source /entrypoint
+
+celery -A backend.taskapp worker -l INFO

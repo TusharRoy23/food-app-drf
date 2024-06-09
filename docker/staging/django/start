@@ -1,0 +1,6 @@
+#!/bin/sh
+
+source /entrypoint
+
+python /app/manage.py collectstatic --noinput
+/usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:8080 --chdir=/app --timeout ${GUNICORN_TIMEOUT} --workers ${GUNICORN_NUM_WORKERS}

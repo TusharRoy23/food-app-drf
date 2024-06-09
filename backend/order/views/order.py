@@ -17,22 +17,6 @@ class VisitorOrderCreateAPIView(BaseVisitorCreateListAPIView):
     pagination_class = BasePagination
     filterset_class = OrderListFilter
 
-    def list(self, request, *args, **kwargs):
-        orders = (
-            self.service_class()
-            .list(
-                **{"user_id": self.get_user().id, **request.query_params.dict()},
-            )
-            .order_by("-created_at")
-        )
-        orders = self.filter_queryset(orders)
-        paginated_orders = self.paginate_queryset(orders)
-        if paginated_orders is not None:
-            output = self.get_serializer(paginated_orders, many=True)
-            return self.get_paginated_response(output.data)
-        output = self.output_serializer(orders, many=True)
-        return Response(output.data)
-
     def post(self, request, *args, **kwargs):
         try:
             serializer = self.input_serializer(data=request.data)

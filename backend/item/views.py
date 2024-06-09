@@ -17,15 +17,8 @@ class ItemListAPIView(BaseVisitorListAPIView):
     pagination_class = BasePagination
     filterset_class = ItemListFilter
 
-    def list(self, request, *args, **kwargs):
-        items = self.get_queryset(**{"status": ItemStatus.ACTIVE})
-        items = self.filter_queryset(items)
-        paginated_items = self.paginate_queryset(items)
-        if paginated_items is not None:
-            output = self.output_serializer(paginated_items, many=True)
-            return self.get_paginated_response(data=output.data)
-        output = self.output_serializer(items, many=True)
-        return Response(output.data)
+    def get_queryset(self):
+        return self.service_class(user=self.request.user).get_items(**{"status": ItemStatus.ACTIVE})
 
 
 class ItemRetrieveAPIView(BaseVisitorRetrieveAPIView):

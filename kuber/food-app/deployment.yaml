@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: food-app
+spec:
+  selector:
+    matchLabels:
+      app: food-app
+  template:
+    metadata:
+      labels:
+        app: food-app
+    spec:
+      initContainers:
+        - name: init-permissions
+          image: busybox
+          command: [ 'sh', '-c', 'chmod -R 0777 /data/staticfiles' ]
+          volumeMounts:
+            - mountPath: /data/staticfiles
+              name: django-app
+      containers:
+        - name: food-app-prod
+          image: food_app_drf_backend_prod
+          imagePullPolicy: Never
+          command:
+            - "/bin/sh"
+            - "-c"
+            - |
+              /start-migration
+              /start
+          envFrom:
+            - configMapRef:
+                name: app-env
+          volumeMounts:
+            - mountPath: /data/staticfiles
+              name: django-app
+      volumes:
+        - name: django-app
+          persistentVolumeClaim:
+            claimName: django-pvc
+

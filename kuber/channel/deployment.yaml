@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: food-app-ws
+spec:
+  selector:
+    matchLabels:
+      app: food-app-ws
+  template:
+    metadata:
+      labels:
+        app: food-app-ws
+    spec:
+      containers:
+        - name: food-app-ws
+          image: food_app_drf_backend_prod
+          imagePullPolicy: Never
+          command:
+            - "/bin/sh"
+            - "-c"
+            - |
+              /start-daphne
+          envFrom:
+            - configMapRef:
+                name: app-env
+          volumeMounts:
+            - mountPath: /data/staticfiles
+              name: staticfiles
+      volumes:
+        - name: staticfiles
+          persistentVolumeClaim:
+            claimName: django-pvc
+
