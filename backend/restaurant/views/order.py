@@ -22,17 +22,8 @@ class OrderListAPIView(BaseRestaurantListAPIView):
     pagination_class = BasePagination
     filterset_class = OrderListFilter
 
-    def list(self, request, *args, **kwargs):
-        orders = self.service_class(user=self.get_user()).get_orders(
-            **request.query_params.dict()
-        )
-        orders = self.filter_queryset(orders)
-        paginated_orders = self.paginate_queryset(orders)
-        if paginated_orders is not None:
-            output = self.output_serializer(paginated_orders, many=True)
-            return self.get_paginated_response(output.data)
-        output = self.output_serializer(orders, many=True)
-        return Response(data=output.data)
+    def get_queryset(self):
+        return self.service_class(user=self.get_user()).get_orders()
 
 
 class OrderRetrieveUpdateAPIView(BaseRetrieveUpdateDestroyAPIView):

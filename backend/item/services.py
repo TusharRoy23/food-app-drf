@@ -18,6 +18,9 @@ class ItemService(BaseModelService):
         item = self.create(**kwargs)
         return item
 
+    def get_items(self, **kwargs):
+        return self.list(**kwargs)
+
     def get_item(self, **kwargs):
         try:
             return self.model.objects.get(**kwargs)

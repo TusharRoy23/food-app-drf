@@ -22,17 +22,8 @@ class ItemListCreateView(BaseRestaurantCreateListAPIView):
     pagination_class = BasePagination
     filterset_class = ItemListFilter
 
-    def list(self, request, *args, **kwargs):
-        items = self.get_queryset(
-            **{"restaurant__id": self.get_restaurant_from_request().id}
-        ).order_by("-created_at")
-        items = self.filter_queryset(items)
-        paginated_items = self.paginate_queryset(items)
-        if paginated_items is not None:
-            output = self.output_serializer(paginated_items, many=True)
-            return self.get_paginated_response(output.data)
-        output = self.output_serializer(items, many=True)
-        return Response(output.data)
+    def get_queryset(self):
+        return self.service_class(user=self.request.user).get_items(**{"restaurant__id": self.get_restaurant_from_request().id}).order_by("-created_at")
 
     def post(self, request, *args, **kwargs):
         serializer = self.input_serializer(
