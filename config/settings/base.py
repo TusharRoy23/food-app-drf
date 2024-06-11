@@ -227,3 +227,9 @@ CELERY_TASK_SOFT_TIME_LIMIT = env.int("CELERY_TASK_SOFT_TIME_LIMIT")
 # https://docs.celeryq.dev/en/latest/userguide/configuration.html#task-track-started
 CELERY_TASK_TRACK_STARTED = True
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+# To generate DB graph
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
