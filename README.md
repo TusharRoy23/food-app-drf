@@ -12,7 +12,7 @@ It's a simple food application on top of DRF(Django Rest Framework) & Postgres. 
 * Restaurants & Customer can receive live notifications regarding their orders. `(Webscoket)`
 
 ## ERD
-will be ERD here
+![Food App ERD](https://github.com/TusharRoy23/food-app-drf/blob/master/graphviz.png)
 
 ## What has been used so far?
 | Name        | version |
