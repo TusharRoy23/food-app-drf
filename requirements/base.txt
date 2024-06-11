@@ -21,3 +21,7 @@ flower==2.0.1  # https://github.com/mher/flower
 
 # Message broker
 redis==5.0.1  # https://github.com/antirez/redis
+
+# generate ERD
+pyparsing==3.1.2
+pydot==2.0.0
