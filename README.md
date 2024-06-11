@@ -9,7 +9,7 @@ It's a simple food application on top of DRF(Django Rest Framework) & Postgres. 
 * Customer can perform CRUD operation on carts & also request for the orders.
 * Users can search restaurants.
 * Rate limiting of requests.
-* Restaurants & Customer can receive live notifications regarding their orders.
+* Restaurants & Customer can receive live notifications regarding their orders. `(Webscoket)`
 
 ## ERD
 will be ERD here
@@ -40,7 +40,7 @@ $ python manage.py createsuperuser
 ```
 # Django admin URL
 Go to [Admin URL](http://localhost:8080/admin/)
-## Create Contact Group, Django Group, Django contact group & Contact
+## Create Contact Group, Django Group, Django contact group, & Contact
 ```(For this application purpose only)```
 ## Contact group
 | Name             | Code             |
@@ -83,6 +83,38 @@ $ kubectl apply -f kuber/redis
 $ kubectl apply -f kuber/food-app
 $ kubectl apply -f kuber/celery
 $ kubectl apply -f kuber/channel
-$ kubectl apply -f kuber/food-app
 $ kubectl apply -f kuber/nginx
 ```
+
+# Postgres (Docker)
+## Import DB
+```bash
+# Upload .sql/.sql.gz file to container's volume (backups)
+$ docker cp /db.sql.gz containerID:/backups/db.sql.gz
+
+# Go inside docker container
+$ docker compose -f local.yml run postgres bash
+
+# Unzip upload db.sql.gz file
+$ gunzip /backups/db.sql.gz
+
+# Import .sql file
+$ psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -d $POSTGRES_DB -f backups/db.sql
+```
+## DB Backup
+```bash
+$ docker exec -it containerID pg_dump -U DB_USER DB_NAME | gzip > db.sql.gz
+```
+
+# Generate ERD
+## Using `django-extensions` [Graph models](https://django-extensions.readthedocs.io/en/latest/graph_models.html#)
+* pyparsing
+* pydot
+```bash
+$ python manage.py graph_models backend --arrow-shape normal > food.dot
+```
+
+## Stay in touch
+- 📖 Checkout my stories - [Medium](https://medium.com/@tushar-chy)
+- 🔗 Connect with me - [LinkedIn](https://www.linkedin.com/in/tushar-roy-chy/)
+- 📫 Contact Me - [chowdhurytusharroy@gmail.com](mailto:chowdhurytusharroy@gmail.com?subject=Hey%20there)
