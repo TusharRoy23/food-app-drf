@@ -106,6 +106,11 @@ $ psql -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER -d $POSTGRES_DB -f 
 $ docker exec -it containerID pg_dump -U DB_USER DB_NAME | gzip > db.sql.gz
 ```
 
+# Unit Test
+* Go inside the django container: `docker compose -f local.yml run djangoServiceName sh`.
+* run all test: `pytest`.
+* run a specific file(s): `pytest backend/item/tests/test_views.py`.
+
 # Generate ERD
 ## Using `django-extensions` [Graph models](https://django-extensions.readthedocs.io/en/latest/graph_models.html#)
 * pyparsing
