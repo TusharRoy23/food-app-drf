@@ -38,6 +38,9 @@ media
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+.gradle
+build
+plugin
 
 # File-based project format
 *.iws
@@ -132,3 +135,8 @@ GitHub.sublime-settings
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build

@@ -95,6 +95,9 @@ $ docker cp /db.sql.gz containerID:/backups/db.sql.gz
 # Go inside docker container
 $ docker compose -f local.yml run postgres bash
 
+# If gzip does not exists. (For alpine based postgres image)
+$ apk add --no-cache gzip
+
 # Unzip upload db.sql.gz file
 $ gunzip /backups/db.sql.gz
 
