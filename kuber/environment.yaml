@@ -5,7 +5,7 @@ metadata:
 data:
   POSTGRES_HOST: 'postgres.default'
   POSTGRES_PORT: '5432'
-  POSTGRES_DB: 'food_backend'
+  POSTGRES_DB: 'food_db'
   POSTGRES_USER: 'tAImfqUsWArtfTwnqCcYHRvzkmsABREbBFVW'
   POSTGRES_PASSWORD: 'KHz6tof50AWJlMa8qyeaaSEc7ydfdEEWcnCmJsaWmHUi7HjXG7YIl9OYk6JIy8BK0eklQE'
   DJANGO_ALLOWED_HOSTS: '*'
@@ -26,7 +26,7 @@ data:
   DJANGO_EMAIL_BACKEND: 'django.core.mail.backends.console.EmailBackend'
   GUNICORN_TIMEOUT: '30'
   GUNICORN_NUM_WORKERS: '3'
-  DATABASE_URL: "postgres://tAImfqUsWArtfTwnqCcYHRvzkmsABREbBFVW:KHz6tof50AWJlMa8qyeaaSEc7ydfdEEWcnCmJsaWmHUi7HjXG7YIl9OYk6JIy8BK0eklQE@postgres:5432/food_backend"
+  DATABASE_URL: "postgres://tAImfqUsWArtfTwnqCcYHRvzkmsABREbBFVW:KHz6tof50AWJlMa8qyeaaSEc7ydfdEEWcnCmJsaWmHUi7HjXG7YIl9OYk6JIy8BK0eklQE@postgres:5432/food_db"
   CELERY_BROKER_URL: "redis://redis:6379/0"
   CHANNEL_LAYERS: "redis://redis:6379/0"
   STATIC_ROOT: "/data/staticfiles"

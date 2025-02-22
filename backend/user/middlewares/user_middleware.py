@@ -27,7 +27,7 @@ class UserMiddleware:
             # contact = ContactPerson.objects.get(Q(user=request.user.id))
             # print(contact)
             self.getUsername(request)
-            request.restaurant = "I am testing"
+            request.store = "I am testing"
 
         #  Code to be executed for each request/response after
         #  the view is called.

@@ -5,8 +5,8 @@ from rest_framework.response import Response
 
 from backend.common.permissions import (
     IsIndividualVisitorUser,
-    IsRestaurantStaff,
-    IsRestaurantUser,
+    IsStoreStaff,
+    IsStoreUser,
     IsVisitorUser,
 )
 
@@ -81,27 +81,27 @@ class ListAPIMixin(object):
         return Response(serializer.data)
 
 
-class RestaurantAPIPermissionMixin:
+class StoreAPIPermissionMixin:
 
     def get_permissions(self):
         """
         Return the list of permission that the subclassed view required
-        :permission: Is restaurant User?
+        :permission: Is store User?
         """
         permissions = super().get_permissions()
-        permissions.append(IsRestaurantUser())
+        permissions.append(IsStoreUser())
 
         return permissions
 
 
-class RestaurantStaffAPIPermissionMixin:
+class StoreStaffAPIPermissionMixin:
     def get_permissions(self):
         """
         Return the list of permission that the subclassed view required
-        :permission: Is this restaurant's staff?
+        :permission: Is this store's staff?
         """
         permissions = super().get_permissions()
-        permissions.append(IsRestaurantStaff())
+        permissions.append(IsStoreStaff())
 
         return permissions
 

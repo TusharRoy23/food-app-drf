@@ -6,8 +6,8 @@ class NotificationConsumer(AsyncWebsocketConsumer):
         if self.scope["contact_person"]:
             contact_person = self.scope["contact_person"]
             self.group_name = (
-                f"restaurant_{contact_person['restaurant_code']}"
-                if contact_person["is_restaurant_user"]
+                f"store_{contact_person['store_code']}"
+                if contact_person["is_store_user"]
                 else f"user_{contact_person['user_id']}"
             )
 
@@ -21,7 +21,7 @@ class NotificationConsumer(AsyncWebsocketConsumer):
             await self.channel_layer.group_discard(self.group_name, self.channel_name)
         await self.close()
 
-    async def notify_restaurant(self, event):
+    async def notify_store(self, event):
         await self.send(text_data=event["message"])
 
     async def notify_user(self, event):

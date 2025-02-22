@@ -17,16 +17,16 @@ class CartService(BaseModelService):
     def get_cart_items(self, **kwargs):
         return self.cart_item_service.get_cart_items(**kwargs)
 
-    def get_restaurant_info(self, **kwargs):
-        from backend.restaurant.services import RestaurantService
+    def get_store_info(self, **kwargs):
+        from backend.store.services import StoreService
 
-        return RestaurantService().get_restaurant_info(**kwargs)
+        return StoreService().get_store_info(**kwargs)
 
     def create_cart(self, cart):
         cart_item = cart.pop("item")
         item = cart_item.get("item")
         cart = self.create(
-            **cart, restaurant=item.restaurant, user=self.user, code="cart"
+            **cart, store=item.store, user=self.user, code="cart"
         )
         return self.cart_item_service.save_cart_item(cart=cart, cart_item=cart_item)
 

@@ -68,10 +68,11 @@ INSTALLED_APPS = [
     "simple_history",
     "backend.user",
     "backend.contact",
-    "backend.restaurant",
+    "backend.store",
     "backend.order",
     "backend.item",
     "backend.cart",
+    "backend.category",
     "backend.taskapp.celery.CeleryConfig",
 ]
 

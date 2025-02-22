@@ -1,8 +1,8 @@
 from .api_mixins import (
     IndividualVisitorAPIPermissionMixin,
     ListAPIMixin,
-    RestaurantAPIPermissionMixin,
-    RestaurantStaffAPIPermissionMixin,
+    StoreAPIPermissionMixin,
+    StoreStaffAPIPermissionMixin,
     RetrieveAPIMixin,
     VisitorAPIPermissionMixin,
 )

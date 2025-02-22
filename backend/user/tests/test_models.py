@@ -9,7 +9,7 @@ def test_create_visitor_user(create_user):
     assert user.is_visitor == True
 
 
-# def test_create_restaurant_user(create_user):
+# def test_create_store_user(create_user):
 #     user = create_user(email="tushar@gm.com", username='tushar' , is_visitor=False)
 #     assert isinstance(user, User)
 #     assert user.is_visitor == False

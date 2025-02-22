@@ -2,20 +2,20 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from backend.common.models import BaseModel
-from backend.restaurant.models import Restaurant
+from backend.store.models import Store
 
 from .contact_group import ContactGroup
 
 
 class Contact(BaseModel):
-    restaurant = models.ForeignKey(
-        Restaurant,
-        related_name="contact_restaurant",
+    store = models.ForeignKey(
+        Store,
+        related_name="contact_store",
         on_delete=models.PROTECT,
         null=True,
         blank=True,
-        verbose_name=_("Restaurant"),
-        help_text=_("For restaurant user"),
+        verbose_name=_("Store"),
+        help_text=_("For store user"),
     )
 
     contact_group = models.ForeignKey(
@@ -28,4 +28,4 @@ class Contact(BaseModel):
     )
 
     def __str__(self):
-        return f"{self.code}-{self.restaurant.name if self.restaurant else ''}"
+        return f"{self.code}-{self.store.name if self.store else ''}"

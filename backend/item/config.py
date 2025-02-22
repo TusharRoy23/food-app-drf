@@ -28,25 +28,31 @@ class ItemType:
     )
 
 
-class MealState:
+class ItemState:
     HOT = "hot"
     COLD = "cold"
     NORMAL = "normal"
+    FROZEN = "frozen"
+    LIQUID = "liquid"
 
     CHOICES = (
         (HOT, "hot"),
         (COLD, "cold"),
         (NORMAL, "normal"),
+        (FROZEN, "frozen"),
+        (LIQUID, "liquid"),
     )
 
 
-class MealFlavor:
+class ItemFlavor:
     SWEET = "sweet"
     SPICY = "spicy"
     SALTY = "salty"
     SOUR = "sour"
     BITTER = "bitter"
     SAVORY = "savory"
+    GROOVE= "groove"
+    NONE = "none"
 
     CHOICES = (
         (SWEET, "sweet"),
@@ -55,26 +61,6 @@ class MealFlavor:
         (SOUR, "sour"),
         (BITTER, "bitter"),
         (SAVORY, "savory"),
-    )
-
-
-class MealType:
-    DAILYFOOD = "daily food"
-    FASTFOOD = "fast food"
-    MEAT = "meat"
-    FISH = "fish"
-    BEVERAGE = "beverage"
-    DESSERT = "dessert"
-    KEBAB = "kebab"
-    ALCOHOL = "alcohol"
-
-    CHOICES = (
-        (DAILYFOOD, "daily food"),
-        (FASTFOOD, "fast food"),
-        (MEAT, "meat"),
-        (FISH, "fish"),
-        (BEVERAGE, "beverage"),
-        (DESSERT, "dessert"),
-        (KEBAB, "kebab"),
-        (ALCOHOL, "alcohol"),
+        (GROOVE, "groove"),
+        (NONE, "none"),
     )

@@ -3,7 +3,7 @@
     "model": "auth.group",
     "pk": 1,
     "fields": {
-        "name": "restaurant-owner",
+        "name": "store-owner",
         "permissions": [
             58,
             59,

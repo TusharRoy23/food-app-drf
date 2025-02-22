@@ -53,19 +53,19 @@ class CustomDjangoModelPermission(permissions.DjangoModelPermissions):
         return request.user.has_perms(perms)
 
 
-class IsRestaurantUser(permissions.BasePermission):
+class IsStoreUser(permissions.BasePermission):
     def has_permission(self, request, view):
         return bool(
             request.user
             and not request.user.is_anonymous
-            and request.user.contact_person_user.is_restaurant_user
+            and request.user.contact_person_user.is_store_user
         )
 
 
-class IsRestaurantStaff(permissions.BasePermission):
+class IsStoreStaff(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return bool(
-            request.user.contact_person_user.contact.restaurant.id == obj.restaurant.id
+            request.user.contact_person_user.contact.store.id == obj.store.id
         )
 
 

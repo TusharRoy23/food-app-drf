@@ -2,14 +2,14 @@
 It's a simple food application on top of DRF(Django Rest Framework) & Postgres. It can be used for learning purposes & will be extended bit by bit.
 
 ## What are the features so far?
-* It is possible to register as a customer & restaurant user.
+* It is possible to register as a customer & store user.
 * Get verification link & verified by mail.
 * JWT token and role-based authentications are available.
-* Restaurant users can perform CRUD operations on the items.
+* Store users can perform CRUD operations on the items.
 * Customer can perform CRUD operation on carts & also request for the orders.
-* Users can search restaurants.
+* Users can search stores.
 * Rate limiting of requests.
-* Restaurants & Customer can receive live notifications regarding their orders. `(Webscoket)`
+* Stores & Customer can receive live notifications regarding their orders. `(Webscoket)`
 
 ## ERD
 ![Food App ERD](https://github.com/TusharRoy23/food-app-drf/blob/master/food_erd.png)
@@ -31,6 +31,12 @@ It's a simple food application on top of DRF(Django Rest Framework) & Postgres. 
 # development
 $ docker compose -f local.yml build --no-cache
 $ docker compose -f local.yml up
+
+# If you want to add new DB in docker env
+$ docker exec -it postgresContainerName psql -U POSTGRES-USERNAME -d postgres
+
+# Inside postgres container RUN
+$ CREATE DATABASE YOUR-DB-NAME 
 ```
 # To run migration
 ```bash
@@ -43,15 +49,15 @@ Go to [Admin URL](http://localhost:8080/admin/)
 ## Create Contact Group, Django Group, Django contact group, & Contact
 ```(For this application purpose only)```
 ## Contact group
-| Name             | Code             |
-| -----------------|------------------|
-| Visitor          | visitor          |
-| Restaurant Owner | restaurant_owner |
-| Restaurant User  | restaurant_user  |
+| Name        | Code        |
+|-------------|-------------|
+| Visitor     | visitor     |
+| Store Owner | store_owner |
+| Store User  | store_user  |
 
 ## Django Group
 Create 2 Groups (for now) & assign permissions to them.
-* restaurant-owner
+* store-owner
 * visitors
 
 ## Django contact group

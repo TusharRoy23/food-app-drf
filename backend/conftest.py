@@ -52,11 +52,11 @@ def client():
 # @pytest.fixture
 # def get_groups(get_permissions):
 #     def _get_groups(
-#             is_restaurant_user=False,
+#             is_store_user=False,
 #             is_visitor=False,
 #     ):
-#         if is_restaurant_user:
-#             return Group.objects.filter(name="restaurant-owner")
+#         if is_store_user:
+#             return Group.objects.filter(name="store-owner")
 #         elif is_visitor:
 #             return Group.objects.filter(name="visitors")
 #         else:

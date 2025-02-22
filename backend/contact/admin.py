@@ -9,7 +9,7 @@ class ContactPersonInline(admin.TabularInline):
 
 class ContactModelAdmin(admin.ModelAdmin):
     ordering = ["-created_at"]
-    list_display = ["code", "restaurant", "created_at", "created_by"]
+    list_display = ["code", "store", "created_at", "created_by"]
     inlines = [
         ContactPersonInline,
     ]

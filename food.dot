@@ -1,7 +1,7 @@
 digraph model_graph {
   // Dotfile by Django-Extensions graph_models
   // Created: 2024-06-11 04:12
-  // Cli Options: backend/user backend/restaurant --arrow-shape normal
+  // Cli Options: backend/user backend/store --arrow-shape normal
 
   fontname = "Roboto"
   fontsize = 8
@@ -914,7 +914,7 @@ digraph model_graph {
     
     
       <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT COLOR="#7B7B7B" FACE="Roboto"><B>restaurant</B></FONT>
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><B>store</B></FONT>
       </TD><TD ALIGN="LEFT">
       <FONT COLOR="#7B7B7B" FACE="Roboto"><B>ForeignKey (id)</B></FONT>
       </TD></TR>
@@ -1036,7 +1036,7 @@ digraph model_graph {
     
     
       <TR><TD ALIGN="LEFT" BORDER="0">
-      <FONT FACE="Roboto">is_restaurant_owner</FONT>
+      <FONT FACE="Roboto">is_store_owner</FONT>
       </TD><TD ALIGN="LEFT">
       <FONT FACE="Roboto">BooleanField</FONT>
       </TD></TR>

@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from backend.common.models import BaseModel
 from backend.common.validators import ScreenMethodValidator
-from backend.restaurant.models import Restaurant
+from backend.store.models import Store
 
 from ..item.models import Item
 from .config import OrderStatus, PaidBy
@@ -20,12 +20,12 @@ class Order(BaseModel):
         verbose_name="Order User",
         help_text=_("Order User"),
     )
-    restaurant = models.ForeignKey(
-        Restaurant,
+    store = models.ForeignKey(
+        Store,
         on_delete=models.CASCADE,
-        related_name="order_restaurant",
-        verbose_name="Restaurant",
-        help_text=_("The restaurant"),
+        related_name="order_store",
+        verbose_name="Store",
+        help_text=_("The Store"),
     )
     order_amount = models.DecimalField(
         default=0.0,

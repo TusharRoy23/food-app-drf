@@ -1,9 +1,9 @@
 from .api_views import (
     BaseCreateAPIView,
     BaseCreateListAPIView,
-    BaseRestaurantCreateListAPIView,
-    BaseRestaurantListAPIView,
-    BaseRestaurantRetrieveUpdateDestroyAPIView,
+    BaseStoreCreateListAPIView,
+    BaseStoreListAPIView,
+    BaseStoreRetrieveUpdateDestroyAPIView,
     BaseRetrieveUpdateDestroyAPIView,
     BaseVisitorCreateAPIView,
     BaseVisitorCreateListAPIView,

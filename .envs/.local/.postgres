@@ -2,6 +2,6 @@
 # ------------------------------------------------------------------------------
 POSTGRES_HOST=postgres
 POSTGRES_PORT=5432
-POSTGRES_DB=food_backend
+POSTGRES_DB=food_db
 POSTGRES_USER=tAImfqUsWArtfTwnqCcYHRvzkmsABREbBFVW
 POSTGRES_PASSWORD=KHz6tof50AWJlMa8qyeaaSEc7ydfdEEWcnCmJsaWmHUi7HjXG7YIl9OYk6JIy8BK0eklQE

@@ -408,36 +408,36 @@
     "model": "auth.permission",
     "pk": 46,
     "fields": {
-        "name": "Can add restaurant",
+        "name": "Can add store",
         "content_type": 12,
-        "codename": "add_restaurant"
+        "codename": "add_store"
     }
 },
 {
     "model": "auth.permission",
     "pk": 47,
     "fields": {
-        "name": "Can change restaurant",
+        "name": "Can change store",
         "content_type": 12,
-        "codename": "change_restaurant"
+        "codename": "change_store"
     }
 },
 {
     "model": "auth.permission",
     "pk": 48,
     "fields": {
-        "name": "Can delete restaurant",
+        "name": "Can delete store",
         "content_type": 12,
-        "codename": "delete_restaurant"
+        "codename": "delete_store"
     }
 },
 {
     "model": "auth.permission",
     "pk": 49,
     "fields": {
-        "name": "Can view restaurant",
+        "name": "Can view store",
         "content_type": 12,
-        "codename": "view_restaurant"
+        "codename": "view_store"
     }
 },
 {

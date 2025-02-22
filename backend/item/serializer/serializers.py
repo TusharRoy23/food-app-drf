@@ -9,7 +9,7 @@ from ..models import Item
 class ItemOutputSerializer(ExcludeFieldsMixin, BaseSerializer):
     class Meta:
         model = Item
-        exclude = ["id", "restaurant"]
+        exclude = ["id", "store"]
 
 
 class BaseItemOutputSerializer(BaseSerializer):

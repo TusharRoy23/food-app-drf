@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from backend.common.models import BaseModel
 from backend.common.validators import ScreenMethodValidator
 from backend.item.models import Item
-from backend.restaurant.models import Restaurant
+from backend.store.models import Store
 
 from .config import CartStatus
 
@@ -20,12 +20,12 @@ class Cart(BaseModel):
         verbose_name="Cart User",
         help_text=_("Cart User"),
     )
-    restaurant = models.ForeignKey(
-        Restaurant,
+    store = models.ForeignKey(
+        Store,
         on_delete=models.CASCADE,
-        related_name="cart_restaurant",
-        verbose_name="Restaurant",
-        help_text=_("The restaurant"),
+        related_name="cart_store",
+        verbose_name="Store",
+        help_text=_("The store"),
     )
     cart_amount = models.DecimalField(
         default=0.0,

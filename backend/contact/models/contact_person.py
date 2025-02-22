@@ -32,14 +32,14 @@ class ContactPerson(BaseModel):
         blank=True,
         verbose_name=_("Contact Person address"),
     )
-    is_restaurant_owner = models.BooleanField(default=False)
-    is_restaurant_user = models.BooleanField(default=False)
+    is_store_owner = models.BooleanField(default=False)
+    is_store_user = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.user.email}-{self.contact.restaurant.name if self.contact.restaurant else ''}"
+        return f"{self.user.email}-{self.contact.store.name if self.contact.store else ''}"
 
     def screen_contact_person(self):
         if (
-            self.is_restaurant_user or self.is_restaurant_owner
-        ) and self.contact.restaurant is None:
-            raise InvalidInputException(message="Restaurant is required")
+            self.is_store_user or self.is_store_owner
+        ) and self.contact.store is None:
+            raise InvalidInputException(message="Store is required")

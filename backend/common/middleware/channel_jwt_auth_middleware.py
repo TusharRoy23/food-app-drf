@@ -43,13 +43,13 @@ class ChannelJwtAuthMiddleware(BaseMiddleware):
             data = ContactPerson.objects.get(user__id=user.id)
             return dict(
                 {
-                    "restaurant_code": (
-                        data.contact.restaurant.code
-                        if data.contact.restaurant
+                    "store_code": (
+                        data.contact.store.code
+                        if data.contact.store
                         else None
                     ),
                     "user_id": data.user.id,
-                    "is_restaurant_user": data.is_restaurant_user,
+                    "is_store_user": data.is_store_user,
                 }
             )
         except ObjectDoesNotExist:

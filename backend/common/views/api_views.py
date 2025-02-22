@@ -4,8 +4,8 @@ from backend.common.mixins import (
     IndividualVisitorAPIPermissionMixin,
     ListAPIMixin,
     RequestMixins,
-    RestaurantAPIPermissionMixin,
-    RestaurantStaffAPIPermissionMixin,
+    StoreAPIPermissionMixin,
+    StoreStaffAPIPermissionMixin,
     RetrieveAPIMixin,
     VisitorAPIPermissionMixin,
 )
@@ -89,30 +89,30 @@ class BaseRetrieveUpdateDestroyAPIView(
     service_class = None
 
 
-class BaseRestaurantListAPIView(
-    RestaurantAPIPermissionMixin,
+class BaseStoreListAPIView(
+    StoreAPIPermissionMixin,
     BaseListAPIView,
 ):
     """
-    List permission for restaurants users
+    List permission for stores' users
     """
 
 
-class BaseRestaurantCreateListAPIView(
-    RestaurantAPIPermissionMixin, BaseCreateListAPIView
+class BaseStoreCreateListAPIView(
+    StoreAPIPermissionMixin, BaseCreateListAPIView
 ):
     """
-    Create and Fetch permission for restaurant users
+    Create and Fetch permission for store users
     """
 
 
-class BaseRestaurantRetrieveUpdateDestroyAPIView(
-    RestaurantAPIPermissionMixin,
-    RestaurantStaffAPIPermissionMixin,
+class BaseStoreRetrieveUpdateDestroyAPIView(
+    StoreAPIPermissionMixin,
+    StoreStaffAPIPermissionMixin,
     BaseRetrieveUpdateDestroyAPIView,
 ):
     """
-    Fetch, Update and Delete permissions for restaurant users
+    Fetch, Update and Delete permissions for store users
     """
 
 
