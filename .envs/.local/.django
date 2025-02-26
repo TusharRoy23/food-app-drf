@@ -1,8 +1,13 @@
 # Django
 # ------------------------------------------------------------------------------
-DJANGO_ALLOWED_HOSTS=0.0.0.0,127.0.0.1,localhost,localhost:8080,localhost:8000
+DJANGO_ALLOWED_HOSTS=*
 SECRET_KEY=tz#@421=7&)^m)xxzmsq&id6c5yheb+qc4*ezn3+k0gqek4u%b
 DEBUG=True
+
+# CORS
+CORS_ALLOWED_ORIGINS=http://localhost:3000
+CORS_ALLOWED_ORIGIN_REGEXES="^http://(?:0\.0\.0\.0|127\.0\.0\.1|localhost)(?::\d+)?$"
+CSRF_TRUSTED_ORIGINS="http://0.0.0.0,http://127.0.0.1,http://localhost:3000"
 
 # Simple JWT
 # ------------------------------------------------------------------------------

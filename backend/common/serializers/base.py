@@ -22,3 +22,9 @@ class LogSerializer(serializers.Serializer):
 
 class BaseSerializer(serializers.ModelSerializer, LogSerializer):
     pass
+
+class ExcludeLogSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        abstract = True
+        exclude = ["created_at", "updated_at", "created_by", "updated_by", "id"]

@@ -1,1 +1,1 @@
-from .base import BaseSerializer
+from .base import BaseSerializer, ExcludeLogSerializer

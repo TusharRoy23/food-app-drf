@@ -1,17 +1,18 @@
 from django.core.exceptions import ObjectDoesNotExist
-from rest_framework.response import Response
 
 from backend.common.pagination import BasePagination
-from backend.common.views import BaseVisitorListAPIView, BaseVisitorRetrieveAPIView
+from backend.common.views import BaseVisitorRetrieveAPIView, BaseListAPIView
 from backend.rest_utils.exceptions import NotFoundException
-
+from rest_framework import permissions
 from .config import ItemStatus
 from .filters import ItemListFilter
 from .serializer import ItemOutputSerializer
 from .services import ItemService
 
 
-class ItemListAPIView(BaseVisitorListAPIView):
+class ItemListAPIView(BaseListAPIView):
+    authentication_classes = []
+    permission_classes = [permissions.AllowAny]
     service_class = ItemService
     output_serializer = ItemOutputSerializer
     pagination_class = BasePagination

@@ -1,5 +1,6 @@
 from .api_views import (
     BaseCreateAPIView,
+    BaseListAPIView,
     BaseCreateListAPIView,
     BaseStoreCreateListAPIView,
     BaseStoreListAPIView,

@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -14,6 +15,7 @@ class Item(BaseModel):
         on_delete=models.PROTECT,
         verbose_name=_("Store"),
         help_text=_("Select a Store"),
+        default=1
     )
     name = models.CharField(max_length=20)
     category = models.ForeignKey(
@@ -23,6 +25,27 @@ class Item(BaseModel):
         help_text=_("Select a Category"),
         related_name="category_items",
         default=1
+    )
+    brand = models.ForeignKey(
+        "Brand",
+        on_delete=models.PROTECT,
+        verbose_name=_("Brand"),
+        help_text=_("Select a Brand"),
+        related_name="brand_items",
+        default=1
+    )
+    sku = models.CharField(
+        max_length=20,
+        verbose_name=_("SKU"),
+        help_text=_("Type a SKU"),
+        null=True,
+        blank=True,
+    )
+    image = models.TextField(
+        verbose_name=_("Image"),
+        help_text=_("set an image url"),
+        null=True,
+        blank=True,
     )
     item_type = models.ForeignKey(
         "ItemType",
@@ -60,6 +83,14 @@ class Item(BaseModel):
         max_digits=5,
         verbose_name=_("Min Order Qty"),
         help_text=_("Set a Min order Qty"),
+        default=1
+    )
+    weight = models.DecimalField(
+        decimal_places=2,
+        max_digits=4,
+        default=1,
+        verbose_name=_("Weight"),
+        help_text=_("Ex. 1Kg, 1Packet, 1Box, etc. (Kg, Packet, and, Box are unit"),
     )
     unit = models.ForeignKey(
         "Unit",
@@ -73,6 +104,7 @@ class Item(BaseModel):
         max_digits=5,
         verbose_name=_("Discount Rate"),
         help_text=_("Set a discount rate"),
+        default=0
     )
     status = models.CharField(
         choices=ItemStatus.CHOICES,
@@ -80,6 +112,10 @@ class Item(BaseModel):
         verbose_name=_("Item Status"),
         help_text=_("Select a Item Status"),
     )
+    rating = models.IntegerField(
+        default=0,
+        validators=[MinValueValidator(0), MaxValueValidator(5)]
+    )
 
     def __str__(self):
-        return f"{self.code} - {self.name}"
+        return f"{self.name} ({self.code})"
