@@ -112,6 +112,19 @@ class Item(BaseModel):
         verbose_name=_("Item Status"),
         help_text=_("Select a Item Status"),
     )
+    short_description = models.TextField(
+        verbose_name=_("Short Description"),
+        help_text=_("Set a Short Description"),
+        null=True,
+        blank=True,
+        max_length=300
+    )
+    long_description = models.TextField(
+        verbose_name=_("Long Description"),
+        help_text=_("Set a Long Description"),
+        null=True,
+        blank=True,
+    )
     rating = models.IntegerField(
         default=0,
         validators=[MinValueValidator(0), MaxValueValidator(5)]

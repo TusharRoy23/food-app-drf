@@ -27,10 +27,29 @@ class ContactPerson(BaseModel):
     )
     address = models.CharField(
         max_length=120,
-        default=None,
-        null=True,
-        blank=True,
         verbose_name=_("Contact Person address"),
+    )
+    mobile = models.CharField(
+        max_length=12,
+        verbose_name=_("mobile number"),
+        null=True,
+        blank=True
+    )
+    country = models.CharField(
+        max_length=20,
+        verbose_name=_("Country")
+    )
+    state = models.CharField(
+        max_length=50,
+        verbose_name=_("State")
+    )
+    city = models.CharField(
+        max_length=20,
+        verbose_name=_("City")
+    )
+    postal_code = models.CharField(
+        max_length=10,
+        verbose_name=_("Postal Code")
     )
     is_store_owner = models.BooleanField(default=False)
     is_store_user = models.BooleanField(default=False)
