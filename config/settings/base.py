@@ -35,6 +35,7 @@ DEBUG = env("DEBUG")
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=[])
 CORS_ALLOWED_ORIGIN_REGEXES = env.list("CORS_ALLOWED_ORIGIN_REGEXES", default=[])
+CORS_ALLOW_CREDENTIALS = True
 
 # SECURITY
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-httponly
@@ -200,6 +201,12 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
     "TOKEN_OBTAIN_SERIALIZER": "backend.user.serializers.CustomTokenObtainSerializer",
     "TOKEN_REFRESH_SERIALIZER": "backend.user.serializers.CustomRefreshTokenSerializer",
+    'AUTH_COOKIE_ACCESS': 'access',  # Cookie name for access token
+    'AUTH_COOKIE_REFRESH': 'refresh',  # Cookie name for refresh token
+    'AUTH_COOKIE_SECURE': False,  # Set to True in production for HTTPS only
+    'AUTH_COOKIE_SAMESITE': 'Lax',  # Prevents CSRF
+    'AUTH_COOKIE_PATH': '/',  # Path where cookie is valid
+    'REFRESH_COOKIE_PATH': '/',  # Path for refresh token cookie
 }
 
 SWAGGER_SETTINGS = {

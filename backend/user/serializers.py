@@ -61,21 +61,32 @@ class CustomRefreshTokenSerializer(TokenRefreshSerializer):
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(max_length=40)
-    password = serializers.CharField(min_length=5, write_only=True)
+    # username = serializers.CharField(max_length=40)
     email = serializers.EmailField(max_length=40)
+    password = serializers.CharField(min_length=5, write_only=True)
     confirm_password = serializers.CharField(min_length=5, write_only=True)
     is_visitor = serializers.BooleanField(default=True)
+    country = serializers.CharField(max_length=20)
+    city = serializers.CharField(max_length=20)
+    state = serializers.CharField(max_length=50)
+    postal_code = serializers.CharField(max_length=10)
+    address = serializers.CharField(max_length=120)
+    mobile = serializers.CharField(max_length=12, allow_blank=True, min_length=8)
 
     class Meta:
         model = User
         fields = [
-            "username",
             "password",
             "confirm_password",
             "email",
             "first_name",
             "last_name",
+            "country",
+            "city",
+            "state",
+            "address",
+            "postal_code",
+            "mobile",
             "is_visitor",
         ]
 

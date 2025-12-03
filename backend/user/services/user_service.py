@@ -23,11 +23,18 @@ class UserService(services.BaseModelService):
         contact_person = {
             "contact_id": contact.id,
             "user_id": kwargs["user"].id,
+            "country": kwargs["country"],
+            "state": kwargs["state"],
+            "city": kwargs["city"],
+            "postal_code": kwargs["postal_code"],
+            "address": kwargs["address"],
+            "mobile": kwargs["mobile"] if "mobile" in kwargs else None
         }
         self.contact_person_service.register_contact_person(**contact_person)
 
     def register_user(self, **kwargs) -> User:
         try:
+            kwargs["username"] = kwargs["email"]
             user = self.create(**kwargs)
             user.set_password(kwargs["password"])
             user.save()

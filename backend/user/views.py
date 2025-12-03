@@ -1,4 +1,5 @@
 from django.db import IntegrityError
+from django.conf import settings
 from rest_framework import permissions, status
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -24,8 +25,28 @@ class LoginUserView(TokenObtainPairView):
             data=request.data, context={"request": request}
         )
         serializer.is_valid(raise_exception=True)
+        response = Response(serializer.validated_data, status=status.HTTP_200_OK)
+        response.set_cookie(
+            key=settings.SIMPLE_JWT['AUTH_COOKIE_ACCESS'],  # e.g. 'access_token'
+            value=serializer.validated_data['access'],
+            expires=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
+            secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+            httponly=True,
+            samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],  # 'Lax' or 'Strict'
+            path=settings.SIMPLE_JWT['AUTH_COOKIE_PATH']
+        )
+        response.set_cookie(
+            key=settings.SIMPLE_JWT['AUTH_COOKIE_REFRESH'],  # e.g. 'refresh_token'
+            value=serializer.validated_data['refresh'],
+            expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
+            secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+            httponly=True,
+            samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
+            path=settings.SIMPLE_JWT['REFRESH_COOKIE_PATH']  # '/auth/refresh/' or '/'
+        )
 
-        return Response(serializer.validated_data, status=status.HTTP_200_OK)
+        # return Response(serializer.validated_data, status=status.HTTP_200_OK)
+        return response
 
 
 class RefreshTokenView(TokenRefreshView):
